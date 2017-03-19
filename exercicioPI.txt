@@ -5,4 +5,35 @@ Meu nome: Renan Bonini (Esta linha é destinada ao segundo commit!)
 
 Minha idade: 24 anos (E esta é destinada ao terceiro commit!)
 
-Estudo na Instituição SENAC (Quarto commit!)
+Estudo na: Instituição SENAC (Quarto commit!)
+
+===============================================
+Informações em java com leitura de dados:
+
+package exercicioPI
+
+import java.util.Scanner;
+
+public class exe1
+	public static void main(String[] args){
+		Scanner read = new Scanner(System.in);
+		
+		String nome, idade, estuda;
+
+		System.out.println("Digite o seu nome: ");
+		nome = read.next();
+
+		System.out.println("Digite a sua idade: ");
+		idade = read.next();
+
+		System.out.println("Digite onde você estuda: ");
+		estuda = read.next();
+
+		System.out.println("O aluno "+nome+",que tem "+idade+", estuda na "+estuda);
+
+	}
+
+}
+
+(Quinto commit!)
+
