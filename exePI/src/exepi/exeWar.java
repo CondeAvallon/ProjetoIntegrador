@@ -123,11 +123,11 @@ public class exeWar {
             System.out.println(" e "+dado3def);
             
            double maxatk = Math.max (dado1atk, Math.max (dado2atk,dado3atk));
-           double meioatk = Math.min(Math.max(dado1atk,dado2atk),dado3atk);
+           double meioatk = Math.max(Math.max(Math.min(dado1atk,dado2atk),Math.min(dado2atk,dado3atk)),(Math.max(Math.min(dado2atk,dado3atk),Math.min(dado1atk,dado3atk))));
            double maxdef = Math.max (dado1def, Math.max (dado2def,dado3def));
 
            double minatk = Math.min (dado1atk, Math.min (dado2atk,dado3atk));
-           double meiodef = Math.min(Math.max(dado1def,dado2def),dado3def);
+           double meiodef = Math.max(Math.max(Math.min(dado1def,dado2def),Math.min(dado2def,dado3def)),(Math.max(Math.min(dado2def,dado3def),Math.min(dado1def,dado3def))));
            double mindef = Math.min (dado1def, Math.min (dado2def,dado3def));
            
             System.out.println("Ataque max: "+maxatk);
