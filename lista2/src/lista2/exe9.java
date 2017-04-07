@@ -16,7 +16,7 @@ public class exe9 {
         int calc1 = (int) ((cpf / 100) / 100000000);
         int digito1 = calc1;
         int calc2 = (int) ((cpf / 100) / 10000000);
-        int digito2 = (calc2 % calc1);
+        int digito2 = (calc2 % (digito1 * 10));
         int calc3 = (int) ((cpf / 100) / 1000000);
         int digito3 = calc3 % (calc2);
         int calc4 = (int) ((cpf / 100) / 100000);
@@ -49,29 +49,23 @@ public class exe9 {
         int soma = (mult1 + mult2 + mult3 + mult4 + mult5 + mult6 + mult7 + mult8 + mult9);
         int resto = soma % 11;
         int resultado = 11 - resto;
-        System.out.println(soma);
+
+        System.out.println("");
 
         switch (resultado) {
-            case 0:
-                if (resultado >= 11) {
-                    if (resultado == 0) {
-                        System.out.println("Passo 1 completo.");
-                    } else {
-                        System.out.println("CPF inválido!");
-                    }
-                } else {
-                    System.out.println("CPF inválido!");
-                }
-                break;
             default:
-                if (resultado < 11) {
+                if (resultado < 10) {
                     if (resultado == digito10) {
                         System.out.println("Passo 1 completo.");
                     } else {
                         System.out.println("CPF inválido!");
                     }
-                } else {
-                    System.out.println("CPF inválido!");
+                } else if (resultado >= 10) {
+                    if (digito10 == 0) {
+                        System.out.println("Passo 1 completo.");
+                    } else {
+                        System.out.println("CPF inválido!");
+                    }
                 }
                 break;
         }
@@ -90,32 +84,25 @@ public class exe9 {
         int soma2 = segundaMult + segundaMult2 + segundaMult3 + segundaMult4 + segundaMult5 + segundaMult6 + segundaMult7 + segundaMult8 + segundaMult9 + segundaMult10;
         int resto2 = soma2 % 11;
         int resultado2 = 11 - resto2;
-        System.out.println(resultado2);
 
         switch (resultado2) {
-            case 0:
-                if (resultado2 >= 10) {
-                    if (resultado2 == 0) {
-                        System.out.println("Passo 2 completo. \nCPF válido!");
-                    } else {
-                        System.out.println("CPF inválido!");
-                    }
-                } else {
-                    System.out.println("CPF inválido!");
-                }
-                break;
             default:
                 if (resultado2 < 10) {
                     if (resultado2 == digito11) {
                         System.out.println("Passo 2 completo. \nCPF válido!");
-                    } else {
-                        System.out.println("CPF inválido!");
                     }
-                } else {
-                    System.out.println("CPF inválido!");
+                } else if (resultado2 >= 10) {
+                    if (digito11 == 0) {
+                        System.out.println("Passo 2 completo. \nCPF válido!");
+                    } else {
+                        System.out.println("Passo 2 incompleto. CPF inválido!");
+                    }
+
                 }
 
         }
+        System.out.println("");
+        System.out.println("=== FIM ===");
     }
 
 }
