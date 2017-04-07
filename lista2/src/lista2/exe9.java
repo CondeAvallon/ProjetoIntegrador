@@ -67,7 +67,6 @@ public class exe9 {
                         System.out.println("CPF inválido!");
                     }
                 }
-                break;
         }
 
         int segundaMult = digito1 * 11;

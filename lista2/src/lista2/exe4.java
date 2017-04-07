@@ -14,7 +14,7 @@ public class exe4 {
         System.out.println("");
         System.out.print("Digite o número do mês: ");
         mes = Integer.parseInt(read.nextLine());
-        System.out.println("Digite o ano: ");
+        System.out.print("Digite o ano: ");
         ano = Integer.parseInt(read.nextLine());
         System.out.println("");
 
@@ -35,12 +35,16 @@ public class exe4 {
             case 9:
             case 11:
                 System.out.println("O mês " + mes + " possui 30 dias.");
+                break;
             case 2:
                 if (bis == 0) {
                     System.out.println("O mês 2 tem 29 dias neste ano pois este é bissexto.");
                 } else {
                     System.out.println("O mês 2 possui 28 dias.");
                 }
+                break;
+            default:
+                System.out.println("Mês inválido.");
         }
 
     }

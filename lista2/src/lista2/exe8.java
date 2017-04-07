@@ -70,6 +70,8 @@ public class exe8 {
                 double multa12 = formula3 + (formula3*0.05) + (formula3 + (formula3*0.05))*0.05;
                 System.out.println("O valor da multa será: R$ " + multa12);
                 break;
+            default:
+                System.out.println("Mês inválido.");
         }
     }
     

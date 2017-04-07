@@ -34,6 +34,9 @@ public class exe5 {
             case "julho":
             case "dezembro":
                 System.out.println("Este mês é de alta temporada!");
+                break;
+            default:
+                System.out.println("Mês inválido.");
 
         }
         System.out.println("");

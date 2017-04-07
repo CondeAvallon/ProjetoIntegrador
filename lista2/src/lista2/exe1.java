@@ -23,9 +23,8 @@ public class exe1 {
             case 0:
                 System.out.println("Este número é divisível por 3.");
                 break;
-            case 1:
-                System.out.println("Este número não é divisível por 3.");
-                break;
+            default:
+                System.out.println("Este mês não é divisível por 3.");
         }
         System.out.println("");
         System.out.println("=== FIM ===");

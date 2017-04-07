@@ -37,7 +37,8 @@ public class exe10 {
                 divisao = num1 / num2;
                 System.out.println("A divisão entre " + num1 + " e " + num2 + " é: " + divisao);
                 break;
-                
+            default:
+                System.out.println("Operação inválida.");
         }
         System.out.println("");
         System.out.println("=== FIM ===");
