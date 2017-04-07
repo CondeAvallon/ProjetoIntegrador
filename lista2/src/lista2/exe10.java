@@ -23,19 +23,19 @@ public class exe10 {
         switch (operacao){
             case "+":
                 soma = num1 + num2;
-                System.out.println("A soma entre " + num1 + " e " + num2 + " é: " + soma);
+                System.out.printf("A soma entre %.2f e %.2f é: %.2f",num1,num2,soma);
                 break;
             case "-":
                 subtracao = num1 - num2;
-                System.out.println("A subtração entre " + num1 + " e " + num2 + " é: " + subtracao);
+                System.out.printf("A subtração entre %.2f e %.2f é: %.2f",num1,num2,subtracao);
                 break;
             case "*":
                 multiplicacao = num1 * num2;
-                System.out.println("A multiplicação entre " + num1 + " e " + num2 + " é: " + multiplicacao);
+                System.out.printf("A multiplicação entre %.2f e %.2f é: %.2f",num1,num2,multiplicacao);
                 break;
             case "/":
                 divisao = num1 / num2;
-                System.out.println("A divisão entre " + num1 + " e " + num2 + " é: " + divisao);
+                System.out.printf("A divisão entre %.2f e %.2f é: %.2f",num1,num2,divisao);
                 break;
             default:
                 System.out.println("Operação inválida.");
