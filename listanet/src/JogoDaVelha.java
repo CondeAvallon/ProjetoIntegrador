@@ -8,6 +8,7 @@ public class JogoDaVelha {
         Scanner read = new Scanner(System.in);
 
         String pos1 = " ", pos2 = " ", pos3 = " ", pos4 = " ", pos5 = " ", pos6 = " ", pos7 = " ", pos8 = " ", pos9 = " ";
+        
         System.out.println("=== JOGO DA VELHA ===\n");
         System.out.println(" 1 | 2 | 3 ");
         System.out.println("---+---+---");
@@ -25,6 +26,25 @@ public class JogoDaVelha {
 
                 System.out.println("Escolha onde quer jogar: ");
                 int tabuleiro = Integer.parseInt(read.nextLine());
+                
+                switch (tabuleiro){
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        System.out.print("");
+                        break;
+                    default:
+                        System.out.println("Local inválido! Jogue novamente!");
+                        i--;
+                        break;
+                }
+                
 
                 switch (tabuleiro) {
                     case 1:
@@ -156,7 +176,7 @@ public class JogoDaVelha {
                     System.out.println("Empate!");
                 }
             } else {
-                System.out.println("Código inválido! Jogue novamente!");
+                System.out.println("*** Código inválido! Jogue novamente! ***");
                 i--;
             }
         }
