@@ -3,59 +3,7 @@ package cassino;
 import java.util.Random;
 import java.util.Scanner;
 
-public class cassino2 {
-
-    //public static double dinheiro;
-    public static double total;
-    public static boolean gameOver = false;
-
-    public static void main(String[] args) {
-
-        Scanner read = new Scanner(System.in);
-
-        int jogo;
-        boolean sair = true;
-        boolean try1 = true;
-
-        System.out.println("=== SEJA BEM-VINDO AO CASSINO SENAC! ===\n");
-
-        while (try1) {
-            try {
-                System.out.println("Digite a quantidade de dinheiro disponível (mínimo $ 100)");
-                total = Double.parseDouble(read.nextLine());
-                try1 = false;
-            } catch (NumberFormatException ex) {
-                System.out.println("Digite um valor válido!");
-            }
-        }
-
-        while (sair) {
-            try {
-                System.out.println("Qual jogo gostaria de jogar? 1-BlackJack / 2-Caça Níquel / 3-Sair");
-                jogo = Integer.parseInt(read.nextLine());
-
-                switch (jogo) {
-                    case 1:
-                        blackJack();
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        System.out.println("==========================================");
-                        System.out.println("Obrigado por ter visitado o CASSINO SENAC!");
-                        System.out.println("Saldo Final: " + total);
-                        sair = false;
-                        break;
-                    default:
-                        System.out.println("Digite um valor válido!");
-                }
-            } catch (NumberFormatException ex) {
-                System.out.println("Digite um valor válido!");
-            }
-
-        }
-
-    }
+public class blackjack {
 
     public static void blackJack() {
 
@@ -81,7 +29,7 @@ public class cassino2 {
                     System.out.println("Quanto você gostaria de apostar?");
                     aposta = Double.parseDouble(read.nextLine());
 
-                    if (aposta > total) {
+                    if (aposta > Cassino.total) {
                         System.out.println("*** Você não possui dinheiro suficiente! ***");
                     } else {
                         try3 = false;
@@ -91,8 +39,8 @@ public class cassino2 {
                     System.out.println("Digite um valor válido!");
                 }
             }
-            total -= aposta;
-            System.out.println("Saldo: " + total);
+            Cassino.total -= aposta;
+            System.out.println("Saldo: " + Cassino.total);
             ganhou = aposta * 2;
 
             int carta1 = (cartas[rnd.nextInt(cartas.length)]);
@@ -100,6 +48,7 @@ public class cassino2 {
 
             System.out.println("===============================");
             System.out.println("Você recebeu duas cartas! ");
+            imprimirCartas(carta1);
             System.out.println(carta1 + " e " + carta2);
             if (carta1 == 1) {
                 System.out.println("Você tirou um Às! Quer que ele valha 1 ou 11?");
@@ -123,8 +72,8 @@ public class cassino2 {
             System.out.println("Totalizando: " + soma);
             if (soma == 21) {
                             System.out.println("Parabéns!!! Você conseguiu 21 e ganhou $" + ganhou + "!");
-                            total += aposta * 2;
-                            System.out.println("Saldo: " + total);
+                            Cassino.total += aposta * 2;
+                            System.out.println("Saldo: " + Cassino.total);
             }
             
             while (soma < 21) {
@@ -149,21 +98,23 @@ public class cassino2 {
                         System.out.println("Totalizando: " + soma);
                         if (soma == 21) {
                             System.out.println("Parabéns!!! Você conseguiu 21 e ganhou $" + ganhou + "!");
-                            total += aposta * 2;
-                            System.out.println("Saldo: " + total);
+                            Cassino.total += aposta * 2;
+                            System.out.println("Saldo: " + Cassino.total);
                         } else if (soma > 21) {
                             //System.out.println("Totalizando: " + soma);
                             System.out.println("Explodiu! Tente novamente!");
-                            System.out.println("Saldo: " + total);
+                            System.out.println("Saldo: " + Cassino.total);
                         }
                     } else if (comprarCarta == 2) {
                         System.out.println("Vez da banca!");
+                        System.out.println("- Pressione enter -");
+                        read.nextLine();
                         int carta1Banca = (cartas[rnd.nextInt(cartas.length)]);
                         int carta2Banca = (cartas[rnd.nextInt(cartas.length)]);
                         somaBanca = carta1Banca + carta2Banca;
                         System.out.println("Cartas da banca totalizaram: " + somaBanca);
 
-                        while (somaBanca < 16 || (somaBanca < soma && somaBanca < 21)) {
+                        while (somaBanca < 16 || (somaBanca <= soma && somaBanca < 21)) {
                             int novaCartaBanca = (cartas[rnd.nextInt(cartas.length)]);
                             System.out.println("Nova carta da banca: " + novaCartaBanca);
                             somaBanca += novaCartaBanca;
@@ -178,19 +129,19 @@ public class cassino2 {
 
                         if (somaBanca > 21) {
                             System.out.println("Banca explodiu! Você ganhou $" + ganhou + "!");
-                            total += aposta * 2;
-                            System.out.println("Saldo: " + total);
+                            Cassino.total += aposta * 2;
+                            System.out.println("Saldo: " + Cassino.total);
                             break;
                         }
 
                         if (soma >= somaBanca) {
                             System.out.println("Parabéns! Você ganhou $" + ganhou);
-                            total += aposta * 2;
-                            System.out.println("Saldo: " + total);
+                            Cassino.total += aposta * 2;
+                            System.out.println("Saldo: " + Cassino.total);
                             break;
                         } else if (somaBanca > soma && somaBanca <= 21) {
                             System.out.println("Você perdeu! Tente novamente!");
-                            System.out.println("Saldo: " + total);
+                            System.out.println("Saldo: " + Cassino.total);
                             break;
                         }
 
@@ -201,7 +152,7 @@ public class cassino2 {
 
             }
 
-            if (total <= 0) {
+            if (Cassino.total <= 0) {
                 System.out.println("*** Seu dinheiro acabou! Game over! *** ");
                 //gameOver = true;
                 System.exit(0);
@@ -233,5 +184,33 @@ public class cassino2 {
         }
 
     }
+    
+    static void imprimirCartas (int a){
+        switch (a){
+            case 1:
+                System.out.println(" ----------");
+                System.out.println("| A        |");
+                System.out.println("|          |");
+                System.out.println("|          |");
+                System.out.println("|    ÀS    |");
+                System.out.println("|          |");
+                System.out.println("|          |");
+                System.out.println("|        A |");
+                System.out.println(" ----------");
+                break;
+            case 2: 
+                System.out.println(" ----------");
+                System.out.println("| 2        |");
+                System.out.println("|          |");
+                System.out.println("|          |");
+                System.out.println("|   DOIS   |");
+                System.out.println("|          |");
+                System.out.println("|          |");
+                System.out.println("|        2 |");
+                System.out.println(" ----------");
+                break;
+        }
+}
 
 }
+
