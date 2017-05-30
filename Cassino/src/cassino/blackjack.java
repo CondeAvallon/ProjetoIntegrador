@@ -4,10 +4,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class blackjack {
+    
+    static Random rnd = new Random();
 
     public static void blackJack() {
 
-        Random rnd = new Random();
+        
         Scanner read = new Scanner(System.in);
 
         double aposta = 0;
@@ -15,13 +17,13 @@ public class blackjack {
         boolean try3 = true;
         boolean try4 = true;
 
-        System.out.println("=== BLACKJACK! ===\n");
+        System.out.println("======================= BLACKJACK! =======================\n");
 
-        int[] cartas = {1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+        int[] baralho = {1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
         int soma = 0, somaBanca = 0;
         double ganhou;
 
-        System.out.println("OK! Vamos começar!");
+        System.out.println("OK! Vamos começar!\n");
 
         while (continuar) {
             while (try3) {
@@ -30,25 +32,30 @@ public class blackjack {
                     aposta = Double.parseDouble(read.nextLine());
 
                     if (aposta > Cassino.total) {
-                        System.out.println("*** Você não possui dinheiro suficiente! ***");
+                        System.err.println("*** Você não possui dinheiro suficiente! ***");
+                        System.out.println("");
                     } else {
                         try3 = false;
                     }
 
                 } catch (NumberFormatException ex) {
-                    System.out.println("Digite um valor válido!");
+                    System.err.println("*** Entrada inválida!! ***");
+                    System.out.println("");
                 }
             }
             Cassino.total -= aposta;
             System.out.println("Saldo: " + Cassino.total);
             ganhou = aposta * 2;
+            
+            
 
-            int carta1 = (cartas[rnd.nextInt(cartas.length)]);
-            int carta2 = (cartas[rnd.nextInt(cartas.length)]);
+            int carta1 = geraCarta(baralho);
+            int carta2 = geraCarta(baralho);
 
             System.out.println("===============================");
             System.out.println("Você recebeu duas cartas! ");
             imprimirCartas(carta1);
+            imprimirCartas(carta2);
             System.out.println(carta1 + " e " + carta2);
             if (carta1 == 1) {
                 System.out.println("Você tirou um Às! Quer que ele valha 1 ou 11?");
@@ -83,7 +90,7 @@ public class blackjack {
                     System.out.println("================================================");
 
                     if (comprarCarta == 1) {
-                        int novaCarta = (cartas[rnd.nextInt(cartas.length)]);
+                        int novaCarta = (geraCarta(baralho));
                         System.out.println("Nova carta: " + novaCarta);
                         if (novaCarta == 1) {
                             System.out.println("Você tirou um Às! Quer que ele valha 1 ou 11?");
@@ -109,13 +116,13 @@ public class blackjack {
                         System.out.println("Vez da banca!");
                         System.out.println("- Pressione enter -");
                         read.nextLine();
-                        int carta1Banca = (cartas[rnd.nextInt(cartas.length)]);
-                        int carta2Banca = (cartas[rnd.nextInt(cartas.length)]);
+                        int carta1Banca = geraCarta(baralho);
+                        int carta2Banca = geraCarta(baralho);
                         somaBanca = carta1Banca + carta2Banca;
                         System.out.println("Cartas da banca totalizaram: " + somaBanca);
 
                         while (somaBanca < 16 || (somaBanca <= soma && somaBanca < 21)) {
-                            int novaCartaBanca = (cartas[rnd.nextInt(cartas.length)]);
+                            int novaCartaBanca = geraCarta(baralho);
                             System.out.println("Nova carta da banca: " + novaCartaBanca);
                             somaBanca += novaCartaBanca;
                             System.out.println("Totalizando: " + somaBanca);
@@ -183,6 +190,11 @@ public class blackjack {
 
         }
 
+    }
+    
+    static int geraCarta(int [] baralho){
+        int carta = (baralho[rnd.nextInt(baralho.length)]);
+        return carta;
     }
     
     static void imprimirCartas (int a){

@@ -16,12 +16,17 @@ public class Roleta {
         int[] jogadaSplit = new int[37];
         int[] jogadaStreet = new int[37];
         int[] jogadaCorner = new int[37];
-        int[] jogadaSixLine = new int[20];
+        int[] jogadaSixLine = new int[37];
         boolean continuarJogo = true;
         boolean continuar = true;
         int[] valor = new int[37];
         int tipo = 0;
-        int x = 0, p = 0;
+        int x = 0;
+        int direta = 0;
+        int split = 0;
+        int street = 0;
+        int corner = 0;
+        int sixLine = 0;
         boolean try1 = true;
         boolean try2 = true;
 
@@ -37,11 +42,16 @@ public class Roleta {
                         System.out.println("=======================");
                         System.out.println("Quanto deseja apostar?");
                         valor[x] = Integer.parseInt(input.nextLine());
+                        if (valor[x] > Cassino.total){
+                            System.err.println("*** Você não possui saldo suficiente! ***");
+                            try1 = true;
+                        } else {
                         Cassino.total -= valor[x];
                         System.out.println("Saldo: $" + Cassino.total);
                         try1 = false;
+                        }
                     } catch (NumberFormatException ex) {
-                        System.out.println(" --- Entrada inválida! ---");
+                        System.err.println("*** Entrada inválida! ***");
                     }
                 }
                 try1 = true;
@@ -55,9 +65,13 @@ public class Roleta {
                         System.out.println("4 - Corner (4 números)");
                         System.out.println("5 - SixLine (6 números)\n");
                         tipo = Integer.parseInt(input.nextLine());
-                        try2 = false;
+                        if (tipo >= 1 && tipo <= 5) {
+                            try2 = false;
+                        } else {
+                            System.err.println("*** Digite um número válido! ***");
+                        }
                     } catch (NumberFormatException ex) {
-                        System.out.println(" --- Entrada inválida! ---");
+                        System.err.println("*** Entrada inválida! ***");
                     }
                 }
                 try2 = true;
@@ -65,77 +79,25 @@ public class Roleta {
 
                 switch (tipo) {
                     case 1:
-                        mesaRoleta();
-                        System.out.println("Em qual número quer apostar?");
-                        jogadaDireta[x] = Integer.parseInt(input.nextLine());
-                        if (roleta == jogadaDireta[x]) {
-                            recompensa[1] = valor[x];
-
-                        }
+                        verificaAposta (jogadaDireta,recompensa,valor,direta,roleta,x,1,1,0);
+                        direta++;
                         break;
                     case 2:
-                        mesaRoleta();
-                        System.out.println("Em quais números quer apostar?");
-                        for (int i = 0; i < 2; i++) {
-                            jogadaSplit[i] = Integer.parseInt(input.nextLine());
-                            if (i != 1) {
-                                System.out.println("e");
-                            } else {
-                                System.out.print("");
-                            }
-                            if (roleta == jogadaSplit[i]) {
-                                recompensa[2] = valor[x];
-
-                            }
-                        }
+                        verificaAposta(jogadaSplit,recompensa,valor,split,roleta,x,2,2,1);
+                        split = split + 2;
                         break;
                     case 3:
-                        mesaRoleta();
-                        System.out.println("Em quais números quer apostar?");
-                        for (int i = 0; i < 3; i++) {
-                            jogadaStreet[i] = Integer.parseInt(input.nextLine());
-                            if (i != 2) {
-                                System.out.println("e");
-                            } else {
-                                System.out.print("");
-                            }
-                            if (roleta == jogadaStreet[i]) {
-                                recompensa[3] = valor[x];
-                            }
-                        }
+                        verificaAposta (jogadaStreet,recompensa,valor,street,roleta,x,3,3,2);
+                        street = street + 3;
                         break;
                     case 4:
-                        mesaRoleta();
-                        System.out.println("Em quais números quer apostar?");
-                        for (int i = 0; i < 4; i++) {
-                            jogadaCorner[i] = Integer.parseInt(input.nextLine());
-                            if (i != 3) {
-                                System.out.println("e");
-                            } else {
-                                System.out.print("");
-                            }
-                            if (roleta == jogadaCorner[i]) {
-                                recompensa[4] = valor[x];
-                            }
-                        }
+                        verificaAposta (jogadaCorner,recompensa,valor,corner,roleta,x,4,4,3);
+                        corner = corner + 4;
                         break;
                     case 5:
-                        mesaRoleta();
-                        System.out.println("Em quais números quer apostar?");
-                        for (int i = 0; i < 6; i++) {
-                            jogadaSixLine[i] = Integer.parseInt(input.nextLine());
-                            if (i != 5) {
-                                System.out.println("e");
-                            } else {
-                                System.out.print("");
-                            }
-
-                            if (roleta == jogadaSixLine[i]) {
-                                recompensa[5] = valor[x];
-                            }
-                        }
+                        verificaAposta (jogadaSixLine,recompensa,valor,sixLine,roleta,x,5,6,5);
+                        sixLine = sixLine + 6;
                         break;
-
                 }
                 x++;
 
@@ -156,11 +118,9 @@ public class Roleta {
             System.out.println("");
 
             verificaPremio(jogadaDireta, jogadaSplit, jogadaStreet, jogadaCorner, jogadaSixLine, roleta, premio, recompensa);
-
             int totalPremio = 0;
             for (int i = 0; i < recompensa.length; i++) {
                 totalPremio += premio[i];
-
             }
             Cassino.total += totalPremio;
 
@@ -182,6 +142,38 @@ public class Roleta {
             }
 
         }
+    }
+    
+    static void verificaAposta (int [] jogada, int [] recompensa, int [] valor, int tipo, int roleta, int x, int y, int w, int z){
+        boolean try6 = true;
+                        while (try6) {
+                            try {
+                                mesaRoleta();
+                                System.out.println("Em quais números quer apostar?");
+                                for (int i = 0; i < w; i++) {
+                                    jogada[tipo] = Integer.parseInt(input.nextLine());
+                                    if (jogada[tipo] >= 0 && jogada[tipo] <= 36) {
+                                        if (i != z) {
+                                            System.out.println("e");
+                                        } else {
+                                            System.out.print("");
+                                        }
+                                        if (roleta == jogada[tipo]) {
+                                            recompensa[y] = valor[x];
+                                        }
+                                        tipo++;
+                                        try6 = false;
+                                    } else {
+                                        System.out.println("*** Número Inválido! ***");
+                                        try6 = true;
+                                        break;
+                                    }
+                                }
+                            } catch (NumberFormatException ex) {
+                                System.out.println("*** Entrada inválida! ***");
+                                try6 = true;
+                            }
+                        }
     }
 
     static void mesaRoleta() {
@@ -212,7 +204,7 @@ public class Roleta {
                 premio[p] = recompensa[2] * 17;
                 //Cassino.total += premio[p];
                 System.out.println("Parabéns! Você acertou o número **" + roleta + "** com aposta Split e ganhou $" + premio[p] + "!");
-
+                p++;
             }
         }
         for (int i = 0; i < c.length; i++) {
@@ -233,7 +225,7 @@ public class Roleta {
         }
         for (int i = 0; i < e.length; i++) {
             if (e[i] == roleta) {
-                premio[p] = recompensa[5] * 4;
+                premio[p] = recompensa[5] * 5;
                 //Cassino.total += premio[p];
                 System.out.println("Parabéns! Você acertou o número **" + roleta + "** com aposta Six Line e ganhou $" + premio[p] + "!");
                 p++;
@@ -243,9 +235,19 @@ public class Roleta {
 
     static int continuarJogo() {
         System.out.println("");
+        boolean try1 = true;
+        int continuar = 0;
+        while (try1){
+            try{
         System.out.println("==========================================");
         System.out.println("Deseja continuar neste jogo(1) ou sair(2)?");
-        int continuar = Integer.parseInt(input.nextLine());
+        continuar = Integer.parseInt(input.nextLine());
+        try1 = false;
+            } catch (NumberFormatException ex){
+                System.out.println("");
+                System.err.println("*** Entrada inválida! ***");
+            }
+        }
         return continuar;
     }
 

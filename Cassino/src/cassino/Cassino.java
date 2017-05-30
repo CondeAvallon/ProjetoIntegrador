@@ -15,24 +15,27 @@ public class Cassino {
         boolean sair = true;
         boolean try1 = true;
 
-        System.out.println("=== SEJA BEM-VINDO AO CASSINO SENAC! ===\n");
+        System.out.println("===========   SEJA BEM-VINDO AO CASSINO SENAC!  ===========\n");
         System.out.println("");
         while (try1) {
             try {
                 System.out.println("Digite a quantidade de dinheiro disponível (mínimo $ 100)");
                 total = Double.parseDouble(read.nextLine());
+                System.out.println("Saldo: $" + total);
                 try1 = false;
             } catch (NumberFormatException ex) {
-                System.out.println("Digite um valor válido!");
+                System.out.println("");
+                System.err.println("*** Digite um valor válido! ***");
             }
         }
 
         while (sair) {
             try {
-                System.out.println("==============================================================");
-                System.out.println("Qual jogo gostaria de jogar? 1-BlackJack / 2-Roleta / 3-Sair");
+                System.out.println("");
+                System.out.println("=======================  M E N U  =========================\n");
+                System.out.println("Qual jogo gostaria de jogar? \n1-BlackJack / 2-Roleta / 3-Sair");
                 jogo = Integer.parseInt(read.nextLine());
-
+                System.out.println("");
                 switch (jogo) {
                     case 1:
                         blackjack.blackJack();
@@ -43,14 +46,15 @@ public class Cassino {
                     case 3:
                         System.out.println("==========================================");
                         System.out.println("Obrigado por ter visitado o CASSINO SENAC!");
-                        System.out.println("Saldo Final: " + total);
+                        System.out.println("Saldo Final: $" + total + "!");
                         sair = false;
                         break;
                     default:
-                        System.out.println("Digite um valor válido!");
+                        System.out.println("");
+                        System.err.println("*** Digite um valor válido! ***");
                 }
             } catch (NumberFormatException ex) {
-                System.out.println("Digite um valor válido!");
+                System.err.println("*** Entrada inválida! ***");
             }
 
         }
