@@ -3,6 +3,11 @@ package cassino;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
+import static Cassino.coresCassino.cor;
+import static Cassino.coresCassino.fundo;
+import static Cassino.coresCassino.limpaTela;
+import static Cassino.coresCassino.negrito;
+import static Cassino.coresCassino.reset;
 
 public class Roleta {
 

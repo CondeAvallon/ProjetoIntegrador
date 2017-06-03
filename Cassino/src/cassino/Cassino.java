@@ -1,11 +1,15 @@
 package cassino;
 
 import java.util.Scanner;
+import static Cassino.coresCassino.cor;
+import static Cassino.coresCassino.fundo;
+import static Cassino.coresCassino.limpaTela;
+import static Cassino.coresCassino.negrito;
+import static Cassino.coresCassino.reset;
 
 public class Cassino {
 
     public static double total;
-    public static boolean gameOver = false;
 
     public static void main(String[] args) {
 
@@ -15,6 +19,7 @@ public class Cassino {
         boolean sair = true;
         boolean try1 = true;
 
+        cor ("azul");
         System.out.println("===========   SEJA BEM-VINDO AO CASSINO SENAC!  ===========\n");
         System.out.println("");
         while (try1) {
